@@ -12,7 +12,6 @@ import WalletConnectIcon from '../../assets/images/walletConnectIcon.svg'
 import { fortmatic, injected, portis, walletconnect, walletlink } from '../../connectors'
 import { NetworkContextName } from '../../constants'
 import useENSName from '../../hooks/useENSName'
-import { useHasSocks } from '../../hooks/useSocksBalance'
 import { useWalletModalToggle } from '../../state/application/hooks'
 import { isTransactionRecent, useAllTransactions } from '../../state/transactions/hooks'
 import { TransactionDetails } from '../../state/transactions/reducer'
@@ -177,7 +176,7 @@ function Web3StatusInner() {
   const pending = sortedRecentTransactions.filter(tx => !tx.receipt).map(tx => tx.hash)
 
   const hasPendingTransactions = !!pending.length
-  const hasSocks = useHasSocks()
+  const hasSocks = false // useHasSocks()
   const toggleWalletModal = useWalletModalToggle()
 
   if (account) {
