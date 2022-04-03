@@ -351,14 +351,14 @@ export default function AccountDetails({
                             <span style={{ marginLeft: '4px' }}>Copy Address</span>
                           </Copy>
                         )}
-                        {chainId && account && (
+                        {account && (
                           <AddressLink
                             hasENS={!!ENSName}
                             isENS={true}
-                            href={chainId && getEtherscanLink(chainId, ENSName, 'address')}
+                            href={getEtherscanLink(40, ENSName, 'address')}
                           >
                             <LinkIcon size={16} />
-                            <span style={{ marginLeft: '4px' }}>View on Etherscan</span>
+                            <span style={{ marginLeft: '4px' }}>View on Teloscan</span>
                           </AddressLink>
                         )}
                       </div>
@@ -373,11 +373,11 @@ export default function AccountDetails({
                             <span style={{ marginLeft: '4px' }}>Copy Address</span>
                           </Copy>
                         )}
-                        {chainId && account && (
+                        {account && (
                           <AddressLink
                             hasENS={!!ENSName}
                             isENS={false}
-                            href={getEtherscanLink(chainId, account, 'address')}
+                            href={getEtherscanLink(40, account, 'address')}
                           >
                             <LinkIcon size={16} />
                             <span style={{ marginLeft: '4px' }}>View on Etherscan</span>

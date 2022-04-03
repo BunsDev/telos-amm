@@ -1,6 +1,6 @@
 {
-  "name": "@uniswap/interface",
-  "description": "Uniswap Interface",
+  "name": "telos-amm-interface",
+  "description": "Telos AMM Interface",
   "homepage": ".",
   "private": true,
   "devDependencies": {
@@ -103,5 +103,10 @@
       "last 1 safari version"
     ]
   },
-  "license": "GPL-3.0-or-later"
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "@sushiswap/sdk": "^5.0.0-canary.116",
+    "jsbi": "^4.2.0",
+    "tiny-invariant": "^1.2.0"
+  }
 }

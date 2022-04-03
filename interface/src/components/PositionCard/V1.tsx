@@ -1,14 +1,14 @@
 import React, { useContext } from 'react'
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom'
-import { Token, TokenAmount, WDEV } from 'moonbeamswap'
-
+import { Token, TokenAmount } from 'moonbeamswap'
+import { WTLOS_TOKEN } from '../../constants'
 import { Text } from 'rebass'
 import { AutoColumn } from '../Column'
 import { ButtonSecondary } from '../Button'
 import { RowBetween, RowFixed } from '../Row'
 import { FixedHeightRow, HoverCard } from './index'
 import DoubleCurrencyLogo from '../DoubleLogo'
-import { useActiveWeb3React } from '../../hooks'
+// import { useActiveWeb3React } from '../../hooks'
 import { ThemeContext } from 'styled-components'
 
 interface PositionCardProps extends RouteComponentProps<{}> {
@@ -19,8 +19,6 @@ interface PositionCardProps extends RouteComponentProps<{}> {
 function V1PositionCard({ token, V1LiquidityBalance }: PositionCardProps) {
   const theme = useContext(ThemeContext)
 
-  const { chainId } = useActiveWeb3React()
-
   return (
     <HoverCard>
       <AutoColumn gap="12px">
@@ -28,7 +26,7 @@ function V1PositionCard({ token, V1LiquidityBalance }: PositionCardProps) {
           <RowFixed>
             <DoubleCurrencyLogo currency0={token} margin={true} size={20} />
             <Text fontWeight={500} fontSize={20} style={{ marginLeft: '' }}>
-              {`${chainId && token.equals(WDEV[chainId]) ? 'WDEV' : token.symbol}/ETH`}
+              {`${token.equals(WTLOS_TOKEN) ? 'WTLOS' : token.symbol}/ETH`}
             </Text>
             <Text
               fontSize={12}

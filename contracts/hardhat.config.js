@@ -17,16 +17,10 @@ module.exports = {
    networks: {
       hardhat: {},
 
-      moonbase: {
-         url: 'https://rpc.api.moonbase.moonbeam.network',
+      telos: {
+         url: 'https://mainnet.telos.net/evm',
          accounts: [privateKey],
-         chainId: 1287,
-      },
-      dev: {
-         url: 'http://127.0.0.1:9933',
-         accounts: [privateKeyDev],
-         network_id: '1281',
-         chainId: 1281,
+         chainId: 40,
       },
    },
    solidity: {

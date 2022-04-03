@@ -1,4 +1,4 @@
-import { ChainId } from 'moonbeamswap'
+// import { ChainId } from 'moonbeamswap'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { Text } from 'rebass'
@@ -112,16 +112,10 @@ const BalanceText = styled(Text)`
   `};
 `
 
-const NETWORK_LABELS: { [chainId in ChainId]: string | null } = {
-  [ChainId.MAINNET]: null,
-  [ChainId.STANDALONE]: 'Moonbeam Development',
-  [ChainId.MOONROCK]: 'Moonrock Rococo',
-  [ChainId.MOONBASE]: 'Moonbase Alpha',
-  [ChainId.MOONSHADOW]: 'Moonshadow Westend',
-}
+const NETWORK_LABELS = 'Telos'
 
 export default function Header() {
-  const { account, chainId } = useActiveWeb3React()
+  const { account } = useActiveWeb3React()
 
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
   //const [isDark] = useDarkModeManager()
@@ -139,7 +133,7 @@ export default function Header() {
         <HeaderControls>
           <HeaderElement>
             <TestnetWrapper>
-              {!isMobile && chainId && NETWORK_LABELS[chainId] && <NetworkCard>{NETWORK_LABELS[chainId]}</NetworkCard>}
+              {!isMobile && NETWORK_LABELS && <NetworkCard>{NETWORK_LABELS}</NetworkCard>}
             </TestnetWrapper>
             <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
               {account && userEthBalance ? (

@@ -9,11 +9,11 @@ import { NetworkConnector } from './NetworkConnector'
 
 const NETWORK_URL = process.env.REACT_APP_NETWORK_URL
   ? process.env.REACT_APP_NETWORK_URL
-  : 'https://rpc.api.moonbase.moonbeam.network'
+  : 'https://mainnet.telos.net/evm'
 const FORMATIC_KEY = process.env.REACT_APP_FORTMATIC_KEY
 const PORTIS_ID = process.env.REACT_APP_PORTIS_ID
 
-export const NETWORK_CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1287')
+export const NETWORK_CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '40')
 
 if (typeof NETWORK_URL === 'undefined') {
   throw new Error(`REACT_APP_NETWORK_URL must be a defined environment variable`)
@@ -29,13 +29,12 @@ export function getNetworkLibrary(): Web3Provider {
 }
 
 export const injected = new InjectedConnector({
-  supportedChainIds: [1281, 1287],
-  //supportedChainIds: [1, 3, 4, 5, 42, 1287]
+  supportedChainIds: [40]
 })
 
 // mainnet only
 export const walletconnect = new WalletConnectConnector({
-  rpc: { 1287: NETWORK_URL },
+  rpc: { 40: NETWORK_URL },
   bridge: 'https://bridge.walletconnect.org',
   qrcode: true,
   // pollingInterval: 15000,

@@ -16,16 +16,10 @@ export function isAddress(value: any): string | false {
     return false
   }
 }
-/*
-const DEVSCAN_PREFIXES: { [chainId in ChainId]: string } = {
-  1: '',
-  1287: 'xxxxxxxxx',
-}
-*/
 
 export function getEtherscanLink(chainId: ChainId, data: string, type: 'transaction' | 'token' | 'address'): string {
   //const prefix = `https://${DEVSCAN_PREFIXES[chainId] || DEVSCAN_PREFIXES[1]}etherscan.io`
-  const prefix = 'https://moonbase.moonscan.io'
+  const prefix = 'https://telos.io'
   switch (type) {
     case 'transaction': {
       return `${prefix}/tx/${data}`
@@ -90,7 +84,7 @@ export function getContract(address: string, ABI: any, library: Web3Provider, ac
 
 // account is optional
 export function getRouterContract(chainId: number, library: Web3Provider, account?: string): Contract {
-  return getContract(ROUTER_ADDRESS[chainId ? chainId.toString() : ''], IUniswapV2Router02ABI, library, account)
+  return getContract(ROUTER_ADDRESS, IUniswapV2Router02ABI, library, account)
 }
 
 export function escapeRegExp(string: string): string {

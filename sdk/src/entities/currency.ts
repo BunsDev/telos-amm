@@ -1,5 +1,4 @@
-import JSBI from 'jsbi'
-
+import { JSBI } from '..'
 import { SolidityType } from '../constants'
 import { validateSolidityTypeInstance } from '../utils'
 
@@ -16,7 +15,7 @@ export class Currency {
   /**
    * The only instance of the base class `Currency`.
    */
-  public static readonly DEV: Currency = new Currency(18, 'DEV', 'Dev')
+  public static readonly TLOS: Currency = new Currency(18, 'TLOS', 'Telos')
 
   /**
    * Constructs an instance of the base class `Currency`. The only instance of the base class `Currency` is `Currency.ETHER`.
@@ -33,5 +32,5 @@ export class Currency {
   }
 }
 
-const DEV = Currency.DEV
-export { DEV }
+const TLOS = Currency.TLOS
+export { TLOS }

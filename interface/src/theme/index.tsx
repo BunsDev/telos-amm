@@ -10,7 +10,7 @@ import styled, {
 //import { useIsDarkMode } from '../state/user/hooks'
 import { Text, TextProps } from 'rebass'
 import { Colors } from './styled'
-import BackgroundImage from '../assets/images/background-min.png'
+import BackgroundImage from '../assets/images/smolke.jpeg'
 
 export * from './components'
 

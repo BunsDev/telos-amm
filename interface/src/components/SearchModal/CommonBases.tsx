@@ -1,13 +1,15 @@
 import React from 'react'
 import { Text } from 'rebass'
-import { ChainId, Currency, currencyEquals, DEV, Token } from 'moonbeamswap'
+import { ChainId, Currency, currencyEquals, Token } from 'moonbeamswap'
 import styled from 'styled-components'
 
-import { SUGGESTED_BASES } from '../../constants'
+// import { SUGGESTED_BASES } from '../../constants'
 import { AutoColumn } from '../Column'
 import QuestionHelper from '../QuestionHelper'
 import { AutoRow } from '../Row'
 import CurrencyLogo from '../CurrencyLogo'
+
+const TLOS = new Token(40, 'TLOS', 18)
 
 const BaseWrapper = styled.div<{ disable?: boolean }>`
   border: 1px solid ${({ theme, disable }) => (disable ? 'transparent' : theme.bg3)};
@@ -38,25 +40,25 @@ export default function CommonBases({
     <AutoColumn gap="md">
       <AutoRow>
         <Text fontWeight={500} fontSize={14}>
-          Common bases
+          Common Bases
         </Text>
         <QuestionHelper text="These tokens are commonly paired with other tokens." />
       </AutoRow>
       <AutoRow gap="4px">
         <BaseWrapper
           onClick={() => {
-            if (!selectedCurrency || !currencyEquals(selectedCurrency, DEV)) {
-              onSelect(DEV)
+            if (!selectedCurrency || !currencyEquals(selectedCurrency, TLOS)) {
+              onSelect(TLOS)
             }
           }}
-          disable={selectedCurrency === DEV}
+          disable={selectedCurrency === TLOS}
         >
-          <CurrencyLogo currency={DEV} style={{ marginRight: 8 }} />
+          <CurrencyLogo currency={TLOS} style={{ marginRight: 8 }} />
           <Text fontWeight={500} fontSize={16}>
-            DEV 
+            TLOS 
           </Text>
         </BaseWrapper>
-        {(chainId ? SUGGESTED_BASES[chainId] : []).map((token: Token) => {
+        {([]).map((token: Token) => {
           const selected = selectedCurrency instanceof Token && selectedCurrency.address === token.address
           return (
             <BaseWrapper onClick={() => !selected && onSelect(token)} disable={selected} key={token.address}>

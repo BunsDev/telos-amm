@@ -1,29 +1,25 @@
-import { Currency, CurrencyAmount, Pair, Token, Trade } from 'moonbeamswap'
-import flatMap from 'lodash.flatmap'
+// import { Currency, CurrencyAmount, Pair, Token, Trade } from 'moonbeamswap'
+// import flatMap from 'lodash.flatmap'
 import { useMemo } from 'react'
-
-import { BASES_TO_CHECK_TRADES_AGAINST, CUSTOM_BASES } from '../constants'
+import { WTLOS } from '../telos_address.json'
+import { CUSTOM_BASES } from '../constants'
 import { PairState, usePairs } from '../data/Reserves'
 import { wrappedCurrency } from '../utils/wrappedCurrency'
 
 import { useActiveWeb3React } from './index'
+import { Currency, CurrencyAmount, Pair, Token, Trade } from 'moonbeamswap'
 
 function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
   const { chainId } = useActiveWeb3React()
 
-  const bases: Token[] = chainId ? BASES_TO_CHECK_TRADES_AGAINST[chainId] : []
-
+  const bases =  [WTLOS]
+  const WTLOS_TOKEN = new Token(40, WTLOS, 18, 'WTLOS' )
+  
   const [tokenA, tokenB] = chainId
-    ? [wrappedCurrency(currencyA, chainId), wrappedCurrency(currencyB, chainId)]
+    ? [wrappedCurrency(currencyA, chainId), wrappedCurrency(currencyB, 40)]
     : [undefined, undefined]
 
-  const basePairs: [Token, Token][] = useMemo(
-    () =>
-      flatMap(bases, (base): [Token, Token][] => bases.map(otherBase => [base, otherBase])).filter(
-        ([t0, t1]) => t0.address !== t1.address
-      ),
-    [bases]
-  )
+  const basePairs = [bases]
 
   const allPairCombinations: [Token, Token][] = useMemo(
     () =>
@@ -32,9 +28,9 @@ function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
             // the direct pair
             [tokenA, tokenB],
             // token A against all bases
-            ...bases.map((base): [Token, Token] => [tokenA, base]),
+            ...bases.map((base): [Token, Token] => [tokenA, WTLOS_TOKEN]),
             // token B against all bases
-            ...bases.map((base): [Token, Token] => [tokenB, base]),
+            ...bases.map((base): [Token, Token] => [tokenB, WTLOS_TOKEN]),
             // each base against all bases
             ...basePairs
           ]
@@ -42,21 +38,20 @@ function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
             .filter(([t0, t1]) => t0.address !== t1.address)
             .filter(([tokenA, tokenB]) => {
               if (!chainId) return true
-              const customBases = CUSTOM_BASES[chainId]
+              const customBases = CUSTOM_BASES[0]
               if (!customBases) return true
 
-              const customBasesA: Token[] | undefined = customBases[tokenA.address]
-              const customBasesB: Token[] | undefined = customBases[tokenB.address]
+              // const customBasesA: undefined
+              // const customBasesB: undefined
+              // if (!customBasesA && !customBasesB) return true
 
-              if (!customBasesA && !customBasesB) return true
-
-              if (customBasesA && !customBasesA.find(base => tokenB.equals(base))) return false
-              if (customBasesB && !customBasesB.find(base => tokenA.equals(base))) return false
+              // if (customBasesA && !customBasesA.find(base => tokenB.equals(base))) return false
+              // if (customBasesB && !customBasesB.find(base => tokenA.equals(base))) return false
 
               return true
             })
         : [],
-    [tokenA, tokenB, bases, basePairs, chainId]
+    [tokenA, tokenB, bases, basePairs, WTLOS_TOKEN, chainId]
   )
 
   const allPairs = usePairs(allPairCombinations)
