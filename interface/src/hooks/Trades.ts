@@ -1,7 +1,6 @@
 // import { Currency, CurrencyAmount, Pair, Token, Trade } from 'moonbeamswap'
 // import flatMap from 'lodash.flatmap'
 import { useMemo } from 'react'
-import { WTLOS } from '../telos_address.json'
 import { CUSTOM_BASES } from '../constants'
 import { PairState, usePairs } from '../data/Reserves'
 import { wrappedCurrency } from '../utils/wrappedCurrency'
@@ -12,8 +11,8 @@ import { Currency, CurrencyAmount, Pair, Token, Trade } from 'moonbeamswap'
 function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
   const { chainId } = useActiveWeb3React()
 
-  const bases =  [WTLOS]
-  const WTLOS_TOKEN = new Token(40, WTLOS, 18, 'WTLOS' )
+  const bases =  ['0xD102cE6A4dB07D247fcc28F366A623Df0938CA9E']
+  const WTLOS_TOKEN = new Token(40, '0xD102cE6A4dB07D247fcc28F366A623Df0938CA9E', 18, 'WTLOS' )
   
   const [tokenA, tokenB] = chainId
     ? [wrappedCurrency(currencyA, chainId), wrappedCurrency(currencyB, 40)]

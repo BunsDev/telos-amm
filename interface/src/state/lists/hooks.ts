@@ -1,8 +1,10 @@
-import { ChainId, Token } from 'moonbeamswap'
+// eslint-disable
+import { Token } from 'moonbeamswap'
 import { Tags, TokenInfo, TokenList } from '@uniswap/token-lists'
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { AppState } from '../index'
+import { ChainId } from '../../sdk/enums'
 
 type TagDetails = Tags[keyof Tags]
 export interface TagInfo extends TagDetails {
@@ -31,11 +33,14 @@ export type TokenAddressMap = Readonly<{ [chainId in ChainId]: Readonly<{ [token
  * An empty result, useful as a default.
  */
 const EMPTY_LIST: TokenAddressMap = {
-  [ChainId.MAINNET]: {},
-  [ChainId.STANDALONE]: {},
-  [ChainId.MOONROCK]: {},
-  [ChainId.MOONBASE]: {},
-  [ChainId.MOONSHADOW]: {}
+  // [ChainId.MAINNET]: {},
+  // [ChainId.STANDALONE]: {},
+  // eslint-disable-next-line
+  [1]: {},
+  // eslint-disable-next-line
+  [40]: {},
+  // eslint-disable-next-line
+  [250]: {}
 }
 
 const listCache: WeakMap<TokenList, TokenAddressMap> | null =
@@ -55,11 +60,12 @@ export function listToTokenMap(list: TokenList): TokenAddressMap {
           })
           ?.filter((x): x is TagInfo => Boolean(x)) ?? []
       const token = new WrappedTokenInfo(tokenInfo, tags)
-      if (tokenMap[token.chainId][token.address] !== undefined) throw Error('Duplicate tokens.')
+      if (tokenMap[40][token.address] !== undefined) throw Error('Duplicate tokens.')
       return {
         ...tokenMap,
-        [token.chainId]: {
-          ...tokenMap[token.chainId],
+        // eslint-disable-next-line
+        [40]: {
+          ...tokenMap[40],
           [token.address]: token
         }
       }
