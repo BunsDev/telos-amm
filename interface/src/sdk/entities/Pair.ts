@@ -8,7 +8,7 @@ import { Token } from './Token'
 import { computePairAddress } from '../functions/computePairAddress'
 import invariant from 'tiny-invariant'
 import { sqrt } from '../functions/math'
-import { JSBI } from 'sdk'
+import { JSBI } from '../../sdk'
 
 export class Pair {
   public readonly liquidityToken: Token
@@ -16,7 +16,7 @@ export class Pair {
 
   public static getAddress(tokenA: Token, tokenB: Token): string {
     return computePairAddress({
-      factoryAddress: FACTORY_ADDRESS[tokenA.chainId],
+      factoryAddress: FACTORY_ADDRESS[40],
       tokenA,
       tokenB,
     })
