@@ -1,4 +1,4 @@
-import { JSBI } from 'sdk'
+import { JSBI } from '../../sdk'
 
 export const MaxUint256 = JSBI.BigInt('0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
 
