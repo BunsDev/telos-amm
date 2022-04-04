@@ -1,6 +1,5 @@
 import MULTICALL_ABI from './abi.json'
-import { multicall } from '../../telos_address.json'
 
-const MULTICALL_NETWORKS =  multicall
+const MULTICALL_NETWORKS =  '0x949855EeECaf8Cb1F194c85e105250717c5E17f4'
 
 export { MULTICALL_ABI, MULTICALL_NETWORKS }

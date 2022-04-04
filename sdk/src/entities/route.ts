@@ -5,9 +5,8 @@ import { Currency, TLOS } from './currency'
 import { Token } from './token'
 import { Pair } from './pair'
 import { Price } from './fractions/price'
-import { WTLOS } from '../telos_address.json'
 
-const WTLOS_TOKEN = new Token(40, WTLOS, 18, 'WTLOS')
+const WTLOS_TOKEN = new Token(40, '0xD102cE6A4dB07D247fcc28F366A623Df0938CA9E', 18, 'WTLOS')
 export class Route {
   public readonly pairs: Pair[]
   public readonly path: Token[]

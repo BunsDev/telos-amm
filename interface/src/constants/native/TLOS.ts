@@ -1,6 +1,5 @@
 import JSBI from 'jsbi'
 import { validateSolidityTypeInstance } from './utils'
-import { factory } from '../../telos_address.json'
 
 // exports for external consumption
 export type BigintIsh = JSBI | bigint | string
@@ -21,7 +20,7 @@ export enum Rounding {
 }
 
 export const FACTORY_ADDRESS: { [key: string]: string } = {
-  [ChainId.TELOS]: factory,
+  [ChainId.TELOS]: '0x81582F803A17a4a454A80600e9185B42E32e0fcF'
 }
 
 export const INIT_CODE_HASH = '0x8d5156b1fa4d5924675d6ab8e615754414be695a9ef14a573cdc8069a5ce90ec'
