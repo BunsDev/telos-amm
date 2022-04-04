@@ -9,12 +9,6 @@ import { TLOS } from '../constants/native/TLOS'
 import { useActiveWeb3React } from './index'
 import { useBytes32TokenContract, useTokenContract } from './useContract'
 
-export declare enum ChainId {
-  MAINNET = 1,
-  TELOS = 40,
-  STANDALONE = 1281,
-}
-
 export function useAllTokens(): { [address: string]: Token } {
   const { chainId } = useActiveWeb3React()
   const userAddedTokens = useUserAddedTokens()
@@ -32,7 +26,7 @@ export function useAllTokens(): { [address: string]: Token } {
           },
           // must make a copy because reduce modifies the map, and we do not
           // want to make a copy in every iteration
-          { ...allTokens[ChainId.TELOS] }
+          { ...allTokens[40] }
         )
     )
   }, [chainId, userAddedTokens, allTokens])
