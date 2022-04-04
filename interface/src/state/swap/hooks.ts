@@ -16,7 +16,6 @@ import { SwapState } from './reducer'
 import { useUserSlippageTolerance } from '../user/hooks'
 import { computeSlippageAdjustedAmounts } from '../../utils/prices'
 import { useTranslation } from 'react-i18next'
-import { factory } from '../../telos_address.json'
 import { TLOS } from '../../constants/native/TLOS'
 
 export function useSwapState(): AppState['swap'] {
@@ -206,10 +205,10 @@ function parseCurrencyFromURLParameter(urlParam: any): string {
   if (typeof urlParam === 'string') {
     const valid = isAddress(urlParam)
     if (valid) return valid
-    if (urlParam.toUpperCase() === 'ETH') return 'ETH'
-    if (valid === false) return 'ETH'
+    if (urlParam.toUpperCase() === 'TLOS') return 'TLOS'
+    if (valid === false) return 'TLOS'
   }
-  return 'ETH' ?? ''
+  return 'TLOS' ?? ''
 }
 
 function parseTokenAmountURLParameter(urlParam: any): string {
