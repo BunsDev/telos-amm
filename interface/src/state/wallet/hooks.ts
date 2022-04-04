@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, DEV, JSBI, Token, TokenAmount } from 'moonbeamswap'
+import { Currency, CurrencyAmount, JSBI, Token, TokenAmount } from 'moonbeamswap'
 import { useMemo } from 'react'
 import ERC20_INTERFACE from '../../constants/abis/erc20'
 import { useAllTokens } from '../../hooks/Tokens'
@@ -6,9 +6,10 @@ import { useActiveWeb3React } from '../../hooks'
 import { useMulticallContract } from '../../hooks/useContract'
 import { isAddress } from '../../utils'
 import { useSingleContractMultipleData, useMultipleContractSingleData } from '../multicall/hooks'
+import { TLOS } from '../../constants/native/TLOS'
 
 /**
- * Returns a map of the given addresses to their eventually consistent DEV balances.
+ * Returns a map of the given addresses to their eventually consistent TLOS balances.
  */
 export function useETHBalances(
   uncheckedAddresses?: (string | undefined)[]
@@ -103,7 +104,7 @@ export function useCurrencyBalances(
   ])
 
   const tokenBalances = useTokenBalances(account, tokens)
-  const containsETH: boolean = useMemo(() => currencies?.some(currency => currency === DEV) ?? false, [currencies])
+  const containsETH: boolean = useMemo(() => currencies?.some(currency => currency === TLOS) ?? false, [currencies])
   const ethBalance = useETHBalances(containsETH ? [account] : [])
 
   return useMemo(
@@ -113,7 +114,7 @@ export function useCurrencyBalances(
         if (currency instanceof Token) {
           return tokenBalances[currency.address]
         }
-        if (currency === DEV) return ethBalance[account]
+        if (currency === TLOS) return ethBalance[account]
         return undefined
       }) ?? [],
     [account, currencies, ethBalance, tokenBalances]

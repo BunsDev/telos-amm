@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, currencyEquals, DEV, Token } from 'moonbeamswap'
+import { Currency, CurrencyAmount, currencyEquals, Token } from 'moonbeamswap'
 import React, { CSSProperties, MutableRefObject, useCallback, useMemo } from 'react'
 import { FixedSizeList } from 'react-window'
 import { Text } from 'rebass'
@@ -9,6 +9,7 @@ import { useAddUserToken, useRemoveUserAddedToken } from '../../state/user/hooks
 import { useCurrencyBalance } from '../../state/wallet/hooks'
 import { LinkStyledButton, TYPE } from '../../theme'
 import { useIsUserAddedToken } from '../../hooks/Tokens'
+import { TLOS } from '../../constants/native/TLOS'
 import Column from '../Column'
 import { RowFixed } from '../Row'
 import CurrencyLogo from '../CurrencyLogo'
@@ -18,7 +19,7 @@ import Loader from '../Loader'
 import { isTokenOnList } from '../../utils'
 
 function currencyKey(currency: Currency): string {
-  return currency instanceof Token ? currency.address : currency === DEV ? 'DEV' : ''
+  return currency instanceof Token ? currency.address : currency === TLOS ? 'TLOS' : ''
 }
 
 const StyledBalanceText = styled(Text)`
@@ -171,7 +172,7 @@ export default function CurrencyList({
   fixedListRef?: MutableRefObject<FixedSizeList | undefined>
   showETH: boolean
 }) {
-  const itemData = useMemo(() => (showETH ? [Currency.DEV, ...currencies] : currencies), [currencies, showETH])
+  const itemData = useMemo(() => (showETH ? [TLOS, ...currencies] : currencies), [currencies, showETH])
 
   const Row = useCallback(
     ({ data, index, style }) => {

@@ -1,8 +1,9 @@
-import { Currency, DEV, Token } from 'moonbeamswap'
+import { Currency, Token } from 'moonbeamswap'
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 
 import EthereumLogo from '../../assets/images/ethereum-logo.png'
+import { TLOS } from '../../constants/native/TLOS'
 import useHttpLocations from '../../hooks/useHttpLocations'
 import { WrappedTokenInfo } from '../../state/lists/hooks'
 import Logo from '../Logo'
@@ -34,7 +35,7 @@ export default function CurrencyLogo({
   const uriLocations = useHttpLocations(currency instanceof WrappedTokenInfo ? currency.logoURI : undefined)
 
   const srcs: string[] = useMemo(() => {
-    if (currency === DEV) return []
+    if (currency === TLOS) return []
 
     if (currency instanceof Token) {
       if (currency instanceof WrappedTokenInfo) {
@@ -46,7 +47,7 @@ export default function CurrencyLogo({
     return []
   }, [currency, uriLocations])
 
-  if (currency === DEV) {
+  if (currency === TLOS) {
     return <StyledEthereumLogo src={EthereumLogo} size={size} style={style} />
   }
 

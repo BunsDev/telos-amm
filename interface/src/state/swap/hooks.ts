@@ -1,6 +1,6 @@
 import useENS from '../../hooks/useENS'
 import { parseUnits } from '@ethersproject/units'
-import { Currency, CurrencyAmount, DEV, JSBI, Token, TokenAmount, Trade } from 'moonbeamswap'
+import { Currency, CurrencyAmount, JSBI, Token, TokenAmount, Trade } from 'moonbeamswap'
 import { ParsedQs } from 'qs'
 import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -17,6 +17,7 @@ import { useUserSlippageTolerance } from '../user/hooks'
 import { computeSlippageAdjustedAmounts } from '../../utils/prices'
 import { useTranslation } from 'react-i18next'
 import { factory, routerv2 } from '../../telos_address.json'
+import { TLOS } from '../../constants/native/TLOS'
 
 export function useSwapState(): AppState['swap'] {
   return useSelector<AppState, AppState['swap']>(state => state.swap)
@@ -34,7 +35,7 @@ export function useSwapActionHandlers(): {
       dispatch(
         selectCurrency({
           field,
-          currencyId: currency instanceof Token ? currency.address : currency === DEV ? 'ETH' : ''
+          currencyId: currency instanceof Token ? currency.address : currency === TLOS ? 'TLOS' : ''
         })
       )
     },

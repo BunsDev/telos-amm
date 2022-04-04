@@ -6,7 +6,7 @@ import ENS_PUBLIC_RESOLVER_ABI from '../constants/abis/ens-public-resolver.json'
 import { ERC20_BYTES32_ABI } from '../constants/abis/erc20'
 import ERC20_ABI from '../constants/abis/erc20.json'
 import { MIGRATOR_ABI, MIGRATOR_ADDRESS } from '../constants/abis/migrator'
-import WDEV_ABI from '../constants/abis/weth.json'
+import WTLOS_ABI from '../constants/abis/weth.json'
 import { MULTICALL_ABI, MULTICALL_NETWORKS } from '../constants/multicall'
 import { getContract } from '../utils'
 import { useActiveWeb3React } from './index'
@@ -34,8 +34,8 @@ export function useTokenContract(tokenAddress?: string, withSignerIfPossible?: b
   return useContract(tokenAddress, ERC20_ABI, withSignerIfPossible)
 }
 
-export function useWDEVContract(withSignerIfPossible?: boolean): Contract | null {
-  return useContract('0xD102cE6A4dB07D247fcc28F366A623Df0938CA9E', WDEV_ABI, withSignerIfPossible)
+export function useWTLOSContract(withSignerIfPossible?: boolean): Contract | null {
+  return useContract('0xD102cE6A4dB07D247fcc28F366A623Df0938CA9E', WTLOS_ABI, withSignerIfPossible)
 }
 
 export function useENSRegistrarContract(withSignerIfPossible?: boolean): Contract | null {

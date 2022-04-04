@@ -1,4 +1,4 @@
-import { Currency, DEV, Token } from 'moonbeamswap'
+import { Currency, Token } from 'moonbeamswap'
 import React, { KeyboardEvent, RefObject, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import ReactGA from 'react-ga'
 import { useTranslation } from 'react-i18next'
@@ -15,6 +15,7 @@ import Column from '../Column'
 import ListLogo from '../ListLogo'
 import QuestionHelper from '../QuestionHelper'
 import Row, { RowBetween } from '../Row'
+import { TLOS } from '../../constants/native/TLOS'
 import CommonBases from './CommonBases'
 import CurrencyList from './CurrencyList'
 import { filterTokens } from './filtering'
@@ -67,7 +68,7 @@ export function CurrencySearch({
 
   const showETH: boolean = useMemo(() => {
     const s = searchQuery.toLowerCase().trim()
-    return s === '' || s === 'd' || s === 'de' || s === 'dev'
+    return s === '' || s === 't' || s === 'tl' || s === 'tlo' || s === 'tlos'
   }, [searchQuery])
 
   const tokenComparator = useTokenComparator(invertSearchOrder)
@@ -120,8 +121,8 @@ export function CurrencySearch({
     (e: KeyboardEvent<HTMLInputElement>) => {
       if (e.key === 'Enter') {
         const s = searchQuery.toLowerCase().trim()
-        if (s === 'dev') {
-          handleCurrencySelect(DEV)
+        if (s === 'tlos') {
+          handleCurrencySelect(TLOS)
         } else if (filteredSortedTokens.length > 0) {
           if (
             filteredSortedTokens[0].symbol?.toLowerCase() === searchQuery.trim().toLowerCase() ||

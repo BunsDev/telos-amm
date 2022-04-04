@@ -1,6 +1,6 @@
-# Classic DEX Example forked from Sushiswap-Classic-Exchange (Uniswap)
+# Classic DEX Example forked from Sushiswap / Uniswap V2 and integrated with SoulSwap technology.
 
-Forked from [sushiswap/sushiswap-classic-exchange](https://github.com/sushiswap/sushiswap-classic-exchange), and updated for both a Moonbase Standalone Node and Telos EVM.
+Created for the Telos EVM for the Telos Foundation Hackathon in April, 2022.
 
 ## Moonbase Standalone Addresses
 

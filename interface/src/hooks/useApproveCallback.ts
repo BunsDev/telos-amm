@@ -1,10 +1,11 @@
 import { MaxUint256 } from '@ethersproject/constants'
 import { TransactionResponse } from '@ethersproject/providers'
-import { Trade, TokenAmount, CurrencyAmount, DEV } from 'moonbeamswap'
+import { Trade, TokenAmount, CurrencyAmount } from 'moonbeamswap'
 import { useCallback, useMemo } from 'react'
 import { ROUTER_ADDRESS } from '../constants/addresses'
 import { useTokenAllowance } from '../data/Allowances'
 import { Field } from '../state/swap/actions'
+import { TLOS } from '../constants/native/TLOS'
 import { useTransactionAdder, useHasPendingApproval } from '../state/transactions/hooks'
 import { computeSlippageAdjustedAmounts } from '../utils/prices'
 import { calculateGasMargin } from '../utils'
@@ -30,7 +31,7 @@ export function useApproveCallback(
   // check the current approval status
   const approvalState: ApprovalState = useMemo(() => {
     if (!amountToApprove || !spender) return ApprovalState.UNKNOWN
-    if (amountToApprove.currency === DEV) return ApprovalState.APPROVED
+    if (amountToApprove.currency === TLOS) return ApprovalState.APPROVED
     // we might not have enough data to know whether or not we need to approve
     if (!currentAllowance) return ApprovalState.UNKNOWN
 

@@ -1,4 +1,5 @@
-import { CurrencyAmount, DEV, JSBI } from 'moonbeamswap'
+import { CurrencyAmount, JSBI } from 'moonbeamswap'
+import { TLOS } from '../constants/native/TLOS'
 import { MIN_ETH } from '../constants'
 
 /**
@@ -7,7 +8,7 @@ import { MIN_ETH } from '../constants'
  */
 export function maxAmountSpend(currencyAmount?: CurrencyAmount): CurrencyAmount | undefined {
   if (!currencyAmount) return undefined
-  if (currencyAmount.currency === DEV) {
+  if (currencyAmount.currency === TLOS) {
     if (JSBI.greaterThan(currencyAmount.raw, MIN_ETH)) {
       return CurrencyAmount.ether(JSBI.subtract(currencyAmount.raw, MIN_ETH))
     } else {

@@ -1,10 +1,13 @@
-import { Currency, currencyEquals, DEV, WDEV } from 'moonbeamswap'
 import { useMemo } from 'react'
+import { Currency, currencyEquals } from 'moonbeamswap'
+import { TLOS } from '../constants/native/TLOS'
+import { WTLOS_TOKEN } from '../constants/addresses'
+
 import { tryParseAmount } from '../state/swap/hooks'
 import { useTransactionAdder } from '../state/transactions/hooks'
 import { useCurrencyBalance } from '../state/wallet/hooks'
 import { useActiveWeb3React } from './index'
-import { useWDEVContract } from './useContract'
+import { useWTLOSContract } from './useContract'
 
 export enum WrapType {
   NOT_APPLICABLE,
@@ -25,7 +28,7 @@ export default function useWrapCallback(
   typedValue: string | undefined
 ): { wrapType: WrapType; execute?: undefined | (() => Promise<void>); inputError?: string } {
   const { chainId, account } = useActiveWeb3React()
-  const wethContract = useWDEVContract()
+  const wethContract = useWTLOSContract()
   const balance = useCurrencyBalance(account ?? undefined, inputCurrency)
   // we can always parse the amount typed as the input currency, since wrapping is 1:1
   const inputAmount = useMemo(() => tryParseAmount(typedValue, inputCurrency), [inputCurrency, typedValue])
@@ -36,7 +39,7 @@ export default function useWrapCallback(
 
     const sufficientBalance = inputAmount && balance && !balance.lessThan(inputAmount)
 
-    if (inputCurrency === DEV && currencyEquals(WDEV[chainId], outputCurrency)) {
+    if (inputCurrency === TLOS && currencyEquals(WTLOS_TOKEN, outputCurrency)) {
       return {
         wrapType: WrapType.WRAP,
         execute:
@@ -44,15 +47,15 @@ export default function useWrapCallback(
             ? async () => {
                 try {
                   const txReceipt = await wethContract.deposit({ value: `0x${inputAmount.raw.toString(16)}` })
-                  addTransaction(txReceipt, { summary: `Wrap ${inputAmount.toSignificant(6)} DEV to WDEV` })
+                  addTransaction(txReceipt, { summary: `Wrap ${inputAmount.toSignificant(6)} TLOS to WTLOS_TOKEN` })
                 } catch (error) {
                   console.error('Could not deposit', error)
                 }
               }
             : undefined,
-        inputError: sufficientBalance ? undefined : 'Insufficient DEV balance'
+        inputError: sufficientBalance ? undefined : 'Insufficient TLOS balance'
       }
-    } else if (currencyEquals(WDEV[chainId], inputCurrency) && outputCurrency === DEV) {
+    } else if (currencyEquals(WTLOS_TOKEN, inputCurrency) && outputCurrency === TLOS) {
       return {
         wrapType: WrapType.UNWRAP,
         execute:
@@ -60,13 +63,13 @@ export default function useWrapCallback(
             ? async () => {
                 try {
                   const txReceipt = await wethContract.withdraw(`0x${inputAmount.raw.toString(16)}`)
-                  addTransaction(txReceipt, { summary: `Unwrap ${inputAmount.toSignificant(6)} WDEV to ETH` })
+                  addTransaction(txReceipt, { summary: `Unwrap ${inputAmount.toSignificant(6)} WTLOS to ETH` })
                 } catch (error) {
                   console.error('Could not withdraw', error)
                 }
               }
             : undefined,
-        inputError: sufficientBalance ? undefined : 'Insufficient WDEV balance'
+        inputError: sufficientBalance ? undefined : 'Insufficient WTLOS balance'
       }
     } else {
       return NOT_APPLICABLE

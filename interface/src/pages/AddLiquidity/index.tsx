@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { TransactionResponse } from '@ethersproject/providers'
-import { Currency, currencyEquals, DEV, TokenAmount, WDEV } from 'moonbeamswap'
+import { Currency, currencyEquals, TokenAmount } from 'moonbeamswap'
 import React, { useCallback, useContext, useState } from 'react'
 import { Plus } from 'react-feather'
 import ReactGA from 'react-ga'
@@ -16,6 +16,7 @@ import DoubleCurrencyLogo from '../../components/DoubleLogo'
 import { AddRemoveTabs } from '../../components/NavigationTabs'
 import { MinimalPositionCard } from '../../components/PositionCard'
 import Row, { RowBetween, RowFlat } from '../../components/Row'
+import { WTLOS_TOKEN } from '../../constants/addresses'
 
 import { PairState } from '../../data/Reserves'
 import { useActiveWeb3React } from '../../hooks'
@@ -36,6 +37,7 @@ import { Dots, Wrapper } from '../Pool/styleds'
 import { ConfirmAddModalBottom } from './ConfirmAddModalBottom'
 import { currencyId } from '../../utils/currencyId'
 import { PoolPriceBar } from './PoolPriceBar'
+import { TLOS } from '../../constants/native/TLOS'
 
 export default function AddLiquidity({
   match: {
@@ -49,10 +51,10 @@ export default function AddLiquidity({
   const currencyA = useCurrency(currencyIdA)
   const currencyB = useCurrency(currencyIdB)
 
-  const oneCurrencyIsWDEV = Boolean(
+  const oneCurrencyIsWTLOS = Boolean(
     chainId &&
-      ((currencyA && currencyEquals(currencyA, WDEV[chainId])) ||
-        (currencyB && currencyEquals(currencyB, WDEV[chainId])))
+      ((currencyA && currencyEquals(currencyA, WTLOS_TOKEN)) ||
+        (currencyB && currencyEquals(currencyB, WTLOS_TOKEN)))
   )
 
   const toggleWalletModal = useWalletModalToggle() // toggle wallet when disconnected
@@ -146,15 +148,15 @@ export default function AddLiquidity({
       method: (...args: any) => Promise<TransactionResponse>,
       args: Array<string | string[] | number>,
       value: BigNumber | null
-    if (currencyA === DEV || currencyB === DEV) {
-      const tokenBIsETH = currencyB === DEV
+    if (currencyA === TLOS || currencyB === TLOS) {
+      const tokenBIsETH = currencyB === TLOS
       estimate = router.estimateGas.addLiquidityETH
       method = router.addLiquidityETH
       args = [
         wrappedCurrency(tokenBIsETH ? currencyA : currencyB, chainId)?.address ?? '', // token
         (tokenBIsETH ? parsedAmountA : parsedAmountB).raw.toString(), // token desired
         amountsMin[tokenBIsETH ? Field.CURRENCY_A : Field.CURRENCY_B].toString(), // token min
-        amountsMin[tokenBIsETH ? Field.CURRENCY_B : Field.CURRENCY_A].toString(), // DEV min
+        amountsMin[tokenBIsETH ? Field.CURRENCY_B : Field.CURRENCY_A].toString(), // TLOS min
         account,
         deadlineFromNow
       ]
@@ -450,7 +452,7 @@ export default function AddLiquidity({
 
       {pair && !noLiquidity && pairState !== PairState.INVALID ? (
         <AutoColumn style={{ minWidth: '20rem', marginTop: '1rem' }}>
-          <MinimalPositionCard showUnwrapped={oneCurrencyIsWDEV} pair={pair} />
+          <MinimalPositionCard showUnwrapped={oneCurrencyIsWTLOS} pair={pair} />
         </AutoColumn>
       ) : null}
     </>

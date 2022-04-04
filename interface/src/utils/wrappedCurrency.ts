@@ -1,7 +1,9 @@
-import { ChainId, Currency, CurrencyAmount, DEV, Token, TokenAmount, WDEV } from 'moonbeamswap'
+import { ChainId, Currency, CurrencyAmount, Token, TokenAmount } from 'moonbeamswap'
+import { TLOS } from '../constants/native/TLOS'
+import { WTLOS_TOKEN } from '../constants/addresses'
 
 export function wrappedCurrency(currency: Currency | undefined, chainId: ChainId | undefined): Token | undefined {
-  return chainId && currency === DEV ? WDEV[chainId] : currency instanceof Token ? currency : undefined
+  return chainId && currency === TLOS ? WTLOS_TOKEN : currency instanceof Token ? currency : undefined
 }
 
 export function wrappedCurrencyAmount(
@@ -13,6 +15,6 @@ export function wrappedCurrencyAmount(
 }
 
 export function unwrappedToken(token: Token): Currency {
-  if (token.equals(WDEV[token.chainId])) return DEV
+  if (token.equals(WTLOS_TOKEN)) return TLOS
   return token
 }

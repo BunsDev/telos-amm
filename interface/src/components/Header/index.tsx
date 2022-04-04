@@ -138,7 +138,7 @@ export default function Header() {
             <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
               {account && userEthBalance ? (
                 <BalanceText style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
-                  {userEthBalance?.toSignificant(4)} DEV
+                  {userEthBalance?.toSignificant(4)} TLOS
                 </BalanceText>
               ) : null}
               <Web3Status />

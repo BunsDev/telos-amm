@@ -1,7 +1,7 @@
 import { splitSignature } from '@ethersproject/bytes'
 import { Contract } from '@ethersproject/contracts'
 import { TransactionResponse } from '@ethersproject/providers'
-import { Currency, currencyEquals, DEV, Percent, WDEV } from 'moonbeamswap'
+import { Currency, currencyEquals, Percent } from 'moonbeamswap'
 import React, { useCallback, useContext, useMemo, useState } from 'react'
 import { ArrowDown, Plus } from 'react-feather'
 import ReactGA from 'react-ga'
@@ -17,6 +17,8 @@ import DoubleCurrencyLogo from '../../components/DoubleLogo'
 import { AddRemoveTabs } from '../../components/NavigationTabs'
 import { MinimalPositionCard } from '../../components/PositionCard'
 import Row, { RowBetween, RowFixed } from '../../components/Row'
+import { TLOS } from '../../constants/native/TLOS'
+import { WTLOS, WTLOS_TOKEN } from '../../constants/addresses'
 
 import Slider from '../../components/Slider'
 import CurrencyLogo from '../../components/CurrencyLogo'
@@ -205,8 +207,8 @@ export default function RemoveLiquidity({
     const liquidityAmount = parsedAmounts[Field.LIQUIDITY]
     if (!liquidityAmount) throw new Error('missing liquidity amount')
 
-    const currencyBIsETH = currencyB === DEV
-    const oneCurrencyIsETH = currencyA === DEV || currencyBIsETH
+    const currencyBIsETH = currencyB === TLOS
+    const oneCurrencyIsETH = currencyA === TLOS || currencyBIsETH
     const deadlineFromNow = Math.ceil(Date.now() / 1000) + deadline
 
     if (!tokenA || !tokenB) throw new Error('could not wrap')
@@ -426,11 +428,11 @@ export default function RemoveLiquidity({
     [onUserInput]
   )
 
-  const oneCurrencyIsETH = currencyA === DEV || currencyB === DEV
-  const oneCurrencyIsWDEV = Boolean(
+  const oneCurrencyIsETH = currencyA === TLOS || currencyB === TLOS
+  const oneCurrencyIsWTLOS = Boolean(
     chainId &&
-      ((currencyA && currencyEquals(WDEV[chainId], currencyA)) ||
-        (currencyB && currencyEquals(WDEV[chainId], currencyB)))
+      ((currencyA && currencyEquals(WTLOS_TOKEN, currencyA)) ||
+        (currencyB && currencyEquals(WTLOS_TOKEN, currencyB)))
   )
 
   const handleSelectCurrencyA = useCallback(
@@ -558,23 +560,23 @@ export default function RemoveLiquidity({
                         </Text>
                       </RowFixed>
                     </RowBetween>
-                    {chainId && (oneCurrencyIsWDEV || oneCurrencyIsETH) ? (
+                    {chainId && (oneCurrencyIsWTLOS || oneCurrencyIsETH) ? (
                       <RowBetween style={{ justifyContent: 'flex-end' }}>
                         {oneCurrencyIsETH ? (
                           <StyledInternalLink
-                            to={`/remove/${currencyA === DEV ? WDEV[chainId].address : currencyIdA}/${
-                              currencyB === DEV ? WDEV[chainId].address : currencyIdB
+                            to={`/remove/${currencyA === TLOS ? WTLOS : currencyIdA}/${
+                              currencyB === TLOS ? WTLOS : currencyIdB
                             }`}
                           >
-                            Receive WDEV
+                            Receive WTLOS
                           </StyledInternalLink>
-                        ) : oneCurrencyIsWDEV ? (
+                        ) : oneCurrencyIsWTLOS ? (
                           <StyledInternalLink
                             to={`/remove/${
-                              currencyA && currencyEquals(currencyA, WDEV[chainId]) ? 'ETH' : currencyIdA
-                            }/${currencyB && currencyEquals(currencyB, WDEV[chainId]) ? 'ETH' : currencyIdB}`}
+                              currencyA && currencyEquals(currencyA, WTLOS_TOKEN) ? 'TLOS' : currencyIdA
+                            }/${currencyB && currencyEquals(currencyB, WTLOS_TOKEN) ? 'TLOS' : currencyIdB}`}
                           >
-                            Receive DEV
+                            Receive TLOS
                           </StyledInternalLink>
                         ) : null}
                       </RowBetween>
@@ -685,7 +687,7 @@ export default function RemoveLiquidity({
 
       {pair ? (
         <AutoColumn style={{ minWidth: '20rem', marginTop: '1rem' }}>
-          <MinimalPositionCard showUnwrapped={oneCurrencyIsWDEV} pair={pair} />
+          <MinimalPositionCard showUnwrapped={oneCurrencyIsWTLOS} pair={pair} />
         </AutoColumn>
       ) : null}
     </>

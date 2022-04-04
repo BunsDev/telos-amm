@@ -1,9 +1,10 @@
-import { Currency, CurrencyAmount, DEV, JSBI, Pair, Percent, Price, TokenAmount } from 'moonbeamswap'
+import { Currency, CurrencyAmount, JSBI, Pair, Percent, Price, TokenAmount } from 'moonbeamswap'
 import { useCallback, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { PairState, usePair } from '../../data/Reserves'
 import { useTotalSupply } from '../../data/TotalSupply'
 import { useTranslation } from 'react-i18next'
+import { TLOS } from '../../constants/native/TLOS'
 
 import { useActiveWeb3React } from '../../hooks'
 import { wrappedCurrency, wrappedCurrencyAmount } from '../../utils/wrappedCurrency'
@@ -86,7 +87,7 @@ export function useDerivedMintInfo(
           dependentField === Field.CURRENCY_B
             ? pair.priceOf(tokenA).quote(wrappedIndependentAmount)
             : pair.priceOf(tokenB).quote(wrappedIndependentAmount)
-        return dependentCurrency === DEV ? CurrencyAmount.ether(dependentTokenAmount.raw) : dependentTokenAmount
+        return dependentCurrency === TLOS ? CurrencyAmount.ether(dependentTokenAmount.raw) : dependentTokenAmount
       }
       return undefined
     } else {
