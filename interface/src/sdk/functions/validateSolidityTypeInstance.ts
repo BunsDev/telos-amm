@@ -1,6 +1,6 @@
 import { SOLIDITY_TYPE_MAXIMA, SolidityType, ZERO } from '../constants'
 
-import { JSBI } from 'sdk'
+import { JSBI } from '../../sdk'
 import invariant from 'tiny-invariant'
 
 export function validateSolidityTypeInstance(
