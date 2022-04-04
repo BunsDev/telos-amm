@@ -5,7 +5,6 @@ import { Text } from 'rebass'
 
 import styled from 'styled-components'
 
-// import Logo from '../../assets/images/title-logo.png'
 import Logo from '../../assets/images/logo.png'
 import { useActiveWeb3React } from '../../hooks'
 //import { useDarkModeManager } from '../../state/user/hooks'
