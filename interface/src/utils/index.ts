@@ -93,5 +93,5 @@ export function escapeRegExp(string: string): string {
 
 export function isTokenOnList(defaultTokens: TokenAddressMap, currency?: Currency): boolean {
   if (currency === TLOS) return true
-  return Boolean(currency instanceof Token && defaultTokens[currency.chainId]?.[currency.address])
+  return Boolean(currency instanceof Token && defaultTokens[40]?.[currency.address])
 }

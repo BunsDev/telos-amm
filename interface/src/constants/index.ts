@@ -23,7 +23,7 @@ export const SUGGESTED_BASES = [USDC, FTM]
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR=[WTLOS]
 
-export const PINNED_PAIRS = [WTLOS]
+export const PINNED_PAIRS = [FTM]
 
 export interface WalletInfo {
   connector?: AbstractConnector
