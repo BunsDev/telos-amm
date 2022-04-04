@@ -16,7 +16,7 @@ import { SwapState } from './reducer'
 import { useUserSlippageTolerance } from '../user/hooks'
 import { computeSlippageAdjustedAmounts } from '../../utils/prices'
 import { useTranslation } from 'react-i18next'
-import { factory, routerv2 } from '../../telos_address.json'
+import { factory } from '../../telos_address.json'
 import { TLOS } from '../../constants/native/TLOS'
 
 export function useSwapState(): AppState['swap'] {
@@ -89,8 +89,8 @@ export function tryParseAmount(value?: string, currency?: Currency): CurrencyAmo
 }
 
 const BAD_RECIPIENT_ADDRESSES: string[] = [
-  factory, // v2 factory
-  routerv2 // v2 router 02
+  '0x81582F803A17a4a454A80600e9185B42E32e0fcF', // v2 factory
+  '0xf9D9b96F213aCC6434f16fff5D932FA85cD179f3' // v2 router 02
 ]
 
 /**
