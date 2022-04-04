@@ -17,7 +17,7 @@
   "balance": "Balance: {{ balanceInput }}",
   "unlock": "Unlock",
   "pending": "Pending",
-  "selectToken": "Select a token",
+  "selectToken": "Select Token",
   "searchOrPaste": "Search Token Name, Symbol, or Address",
   "searchOrPasteMobile": "Name, Symbol, or Address",
   "noExchange": "No Exchange Found",
@@ -88,7 +88,7 @@
   "brokenToken": "The selected token is not compatible with Uniswap V1. Adding liquidity will result in locked funds.",
   "toleranceExplanation": "Lowering this limit decreases your risk of frontrunning. However, this makes more likely that your transaction will fail due to normal price movements.",
   "tokenSearchPlaceholder": "Search name or paste address",
-  "chooseAList": "Choose a list",
+  "chooseAList": "Select List",
   "yourLiquidity": "Your Liquidity",
   "loading": "Loading",
   "connectToViewLiquidity": "Connect to a wallet to view your liquidity.",
@@ -117,9 +117,9 @@
   "browseList": "Browse lists",
   "insufficientLiquidityForThisTrade": "Insufficient liquidity for this trade.",
   "connectWallet": "Connect Wallet",
-  "invalidPair": "Invalid pair",
-  "enterAnAmount": "Enter an amount",
-  "selectAToken": "Select a token",
-  "enterARecipient": "Enter a recipient",
-  "invalidRecipt": "Invalid recipient"
+  "invalidPair": "Invalid Pair",
+  "enterAnAmount": "Enter Amount",
+  "selectAToken": "Select Token",
+  "enterARecipient": "Enter Recipient",
+  "invalidRecipt": "Invalid Recipient"
 }

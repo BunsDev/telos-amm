@@ -3,7 +3,7 @@ import { Text } from 'rebass'
 import { ChainId, Currency, currencyEquals, Token } from 'moonbeamswap'
 import styled from 'styled-components'
 
-// import { SUGGESTED_BASES } from '../../constants'
+import { SUGGESTED_BASES } from '../../constants'
 import { AutoColumn } from '../Column'
 import QuestionHelper from '../QuestionHelper'
 import { AutoRow } from '../Row'
@@ -57,7 +57,7 @@ export default function CommonBases({
             TLOS 
           </Text>
         </BaseWrapper>
-        {([]).map((token: Token) => {
+        {(SUGGESTED_BASES).map((token: Token) => {
           const selected = selectedCurrency instanceof Token && selectedCurrency.address === token.address
           return (
             <BaseWrapper onClick={() => !selected && onSelect(token)} disable={selected} key={token.address}>

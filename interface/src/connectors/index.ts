@@ -7,9 +7,10 @@ import { PortisConnector } from '@web3-react/portis-connector'
 import { FortmaticConnector } from './Fortmatic'
 import { NetworkConnector } from './NetworkConnector'
 
-const NETWORK_URL = process.env.REACT_APP_NETWORK_URL
-  ? process.env.REACT_APP_NETWORK_URL
-  : 'https://mainnet.telos.net/evm'
+const NETWORK_URL = // process.env.REACT_APP_NETWORK_URL
+  // ? process.env.REACT_APP_NETWORK_URL
+  'https://rpc1.us.telos.net/evm'
+  // : 'https://mainnet.telos.net/evm'
 const FORMATIC_KEY = process.env.REACT_APP_FORTMATIC_KEY
 const PORTIS_ID = process.env.REACT_APP_PORTIS_ID
 

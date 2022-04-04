@@ -19,7 +19,7 @@ export function isAddress(value: any): string | false {
 }
 
 export function getEtherscanLink(chainId: ChainId, data: string, type: 'transaction' | 'token' | 'address'): string {
-  const prefix = 'https://telos.io'
+  const prefix = 'https://teloscan.io'
   switch (type) {
     case 'transaction': {
       return `${prefix}/tx/${data}`

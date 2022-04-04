@@ -2,6 +2,7 @@ import { JSBI, Percent, Token } from 'moonbeamswap'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import { routerv2 } from '../telos_address.json'
 import { injected, walletconnect } from '../connectors'
+import { FTM, USDC } from './addresses'
 
 const WTLOS = '0xD102cE6A4dB07D247fcc28F366A623Df0938CA9E'
 //fortmatic, portis, walletconnect, walletlink, lattice
@@ -17,7 +18,7 @@ export const BASES_TO_CHECK_TRADES_AGAINST = WTLOS
 export const CUSTOM_BASES = [WTLOS]
 
 // used for display in the default list when adding liquidity
-export const SUGGESTED_BASES = [WTLOS]
+export const SUGGESTED_BASES = [USDC, FTM]
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR=[WTLOS]

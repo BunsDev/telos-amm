@@ -1,6 +1,6 @@
-// the DCTDEX Default token list lives here
+// the default token list lives here
 export const DEFAULT_TOKEN_LIST_URL =
-  'https://raw.githubusercontent.com/soulswapfinance/default-token-list/master/soulswap.tokenlist.json'
+  'https://raw.githubusercontent.com/soulswapfinance/default-token-list/master/tokens/telos.json'
 
 export const DEFAULT_LIST_OF_LISTS: string[] = [
   DEFAULT_TOKEN_LIST_URL
